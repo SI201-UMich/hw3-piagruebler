@@ -1,6 +1,6 @@
-# Name:
-# Student ID:
-# Email:
+# Name: pia Gruebler    
+# Student ID: 5196 8056
+# Email: piag@umich.edu
 # Who or what you worked with on this homework (including generative AI like ChatGPT):
 # If you worked with generative AI also add a statement for how you used it.
 # e.g.:
@@ -33,7 +33,9 @@ class CouponDispenser:
             coupon_cards (list[str]): list of possible coupons users can receive.
         """
         # TODO: Implement per instructions
-        pass
+        self.coupon_cards = coupon_cards
+        self.costumer_roster = []
+        self.issued_indices = []
 
     def __str__(self):
         """
@@ -44,7 +46,12 @@ class CouponDispenser:
             str
         """
         # TODO: Implement per instructions
-        pass
+        str = ""
+        if len(self.coupon_cards) >= 1:
+            for coupon in self.coupon_cards:
+                str += f"{coupon}|"
+        str = str[0:-1]
+        return str
 
     def issue_coupon(self, name):
         """
