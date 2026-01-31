@@ -68,7 +68,17 @@ class CouponDispenser:
             str: message as described above
         """
         # TODO: Implement per instructions
-        pass
+        if len(self.coupon_cards) == 0:
+            return "The box is empty."
+        if name in self.costumer_roster:
+            index = self.costumer_roster.indexOf(name)
+            return f"That name already has a coupon: {self.issued_indices[index]}"
+        else:
+            num = len(self.coupon_cards) - 1
+            rand_int = random.randint(0, num)
+            self.costumer_roster.append(name)
+            self.issued_indices.append(self.coupon_cards[rand_int])
+            return self.coupon_cards[rand_int]
 
     def distribute_session(self):
         """
@@ -86,7 +96,26 @@ class CouponDispenser:
         Reminder: Use lists only (no dictionaries).
         """
         # TODO: Implement per instructions 
-        pass
+        round_number = 1
+        while True:
+            user_input = input(f"Round {round_number} - Enter a name (or a comma-seperated list), or type 'show' or 'exit'")
+            if user_input == "exit":
+                print("Goodbye!")
+                break
+            elif user_input == "show":
+                for i in range(len(self.costumer_roster)):
+                    print(f'{self.costumer_roster[i]}: {self.issued_indices[i]}')
+            else:
+                lst_names = user_input.split(",")
+                for name in lst_names:
+                    stripped_name = name.strip()
+                    if len(stripped_name) > 0:
+                        print(self.issue_coupon(name))
+                    else:
+                        continue
+        round_number += 1
+
+
 
     def tally_distribution(self):
         """
@@ -123,10 +152,10 @@ def main():
     ]
 
     # Uncomment the lines below as you implement each function.
-    # box = CouponDispenser(coupon_cards)
-    # box.distribute_session()
-    # box.tally_distribution()
-    pass
+    box = CouponDispenser(coupon_cards)
+    box.distribute_session()
+    box.tally_distribution()
+    
 
 
 # -----------------------
